@@ -37,19 +37,26 @@ function HandleFinger(finger){
         var bones = finger.bones;
         for (var i=0;i<bones.length;i++){
                 var bone = bones[i];
-                
+                    //handles bone data structure 
+                    HandleBone(bone);
             
         }
+}
+function HandleBone(bone){
+    //the distal end of the bone closest to the finger tip .nextJoint
+    var x = bone.nextJoint[0];
+    var y = bone.nextJoint[1];
+    var z = bone.nextJoint[2];
+    console.log(x,y,z);
 }
 function HandleHand(hand){
 	 var fingers=hand.fingers;
         for (var i=0;i<fingers.length;i++){
         //console.log(fingers[i]);
         //comment out the if statement to print all circles
-        	//if(fingers[i].type==1){
-                	var finger = fingers[i];
-			HandleFinger(finger);
-        	//}
+                var finger = fingers[i];
+                //handles finger data type structures
+		HandleFinger(finger);
         }
             
 }
