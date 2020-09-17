@@ -32,7 +32,14 @@ function HandleFinger(finger){
         var newRangeY=(window.innnerHeight-y-0);
         var newY =(((y - rawYMin) * newRangeY) /oldRangeY) + rawYMin;
 	newY =(y-rawYMin)*(window.innerHeight-0)/(rawYMax-rawYMin)+rawYMin
- 	circle(x,y,50);
+        //draws each circle for finger tip
+ 	//circle(x,y,50);
+        var bones = finger.bones;
+        for (var i=0;i<bones.length;i++){
+                var bone = bones[i];
+                
+            
+        }
 }
 function HandleHand(hand){
 	 var fingers=hand.fingers;
