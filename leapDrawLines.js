@@ -38,14 +38,13 @@ function HandleHand(hand){
 	 var fingers=hand.fingers;
         for (var i=0;i<fingers.length;i++){
         //console.log(fingers[i]);
-        	if(fingers[i].type==1){
+        //comment out the if statement to print all circles
+        	//if(fingers[i].type==1){
                 	var finger = fingers[i];
 			HandleFinger(finger);
-        	}
+        	//}
         }
-                //console.log(finger);
-
-
+            
 }
 function Handleframe(frame){
 	if(frame.hands.length==1){
