@@ -32,7 +32,6 @@ function HandleFinger(finger){
         var newRangeY=(window.innnerHeight-y-0);
         var newY =(((y - rawYMin) * newRangeY) /oldRangeY) + rawYMin;
 	newY =(y-rawYMin)*(window.innerHeight-0)/(rawYMax-rawYMin)+rawYMin
-        //draws each circle for finger tip
  	//circle(x,y,50);
         var bones = finger.bones;
         for (var i=0;i<bones.length;i++){
@@ -47,7 +46,22 @@ function HandleBone(bone){
     var x = bone.nextJoint[0];
     var y = bone.nextJoint[1];
     var z = bone.nextJoint[2];
-    console.log(x,y,z);
+    if (bone.nextJoint[0] <rawXMin){
+		rawXMin=bone.nextJoint[0];
+	}
+	if (bone.nextJoint[0] > rawXMax){
+                rawXMax=bone.nextJoint[0];
+        }
+	if (bone.nextJoint[1] <rawYMin){
+                rawYMin=bone.nextJoint[1];
+        }
+	if (bone.nextJoint[1] > rawYMax){
+                rawYMax=bone.nextJoint[1];
+        }
+	var oldRangeX = (rawXMax-rawXMin);
+	var newRangeX=(window.innerWidth-0);
+	var x =(((x - rawXMin) * newRangeX) /oldRangeX) + rawXMin;
+        circle(x,y,50);
 }
 function HandleHand(hand){
 	 var fingers=hand.fingers;

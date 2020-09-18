@@ -36,7 +36,6 @@ function HandleFinger(finger){
 }
 function HandleHand(hand){
 	 var fingers=hand.fingers;
-         HandleFinger(fingers)
         for (var i=0;i<fingers.length;i++){
         //console.log(fingers[i]);
         	if(fingers[i].type==1){
@@ -44,13 +43,13 @@ function HandleHand(hand){
 			HandleFinger(finger);
         	}
         }
-                
+                //console.log(finger);
 
 
 }
 function Handleframe(frame){
 	if(frame.hands.length==1){
-        	console.log(frame.hands);
+        	//console.log(frame.hands);
                 var hand = frame.hands[0];
 		HandleHand(hand);
 	}
