@@ -9,7 +9,7 @@ var rawYMax = 100;
 function HandleFinger(finger){
 	var x = finger.tipPosition[0];
 	var y=finger.tipPosition[1];
-	var z=finger.tipPosition[2];
+	//var z=finger.tipPosition[2];
 	//checks wheather the current horizontal position of the tip is less than the value stored in rawXMin.
 	if (finger.tipPosition[0] <rawXMin){
 		rawXMin=finger.tipPosition[0];
@@ -45,12 +45,12 @@ function HandleBone(bone){
     //the distal end of the bone closest to the finger tip .nextJoint
     var x = bone.nextJoint[0];
     var y = bone.nextJoint[1];
-    var z = bone.nextJoint[2];
+    //var z = bone.nextJoint[2];
     //the proximal end of the bone closest to the torso 
     var x1 = bone.prevJoint[0];
     var y1 = bone.prevJoint[1];
-    var z1 = bone.prevJoint[2];
-    
+    //var z1 = bone.prevJoint[2];
+    //calibration for both the base and tip of the bone 
     if (bone.nextJoint[0] <rawXMin){
 		rawXMin=bone.nextJoint[0];
 	}
@@ -75,6 +75,7 @@ function HandleBone(bone){
 	if (bone.prevJoint[1] > rawYMax){
                 rawYMax=bone.prevJoint[1];
         }
+        //apply same scaling  
         var oldRangeX1 = (rawXMax-rawXMin);
 	var newRangeX1=(window.innerWidth-0);
 	x1 =(((x1 - rawXMin) * newRangeX1) /oldRangeX1) + rawXMin;
@@ -84,17 +85,23 @@ function HandleBone(bone){
 	newY1 =(y1-rawYMin)*(window.innerHeight-0)/(rawYMax-rawYMin)+0;
         y1 = window.innerHeight-newY1;
         
-       
+       //apply same scaling
 	var oldRangeX = (rawXMax-rawXMin);
 	var newRangeX=(window.innerWidth-0);
 	x =(((x - rawXMin) * newRangeX) /oldRangeX) + rawXMin;
         var oldRangeY = (rawYMax-rawYMin);
         var newRangeY=(window.innnerHeight-0);
         var newY =(((y - rawYMin) * newRangeY) /oldRangeY) + rawYMin;
-	newY =(y-rawYMin)*(window.innerHeight-0)/(rawYMax-rawYMin)+0
+	newY =(y-rawYMin)*(window.innerHeight-0)/(rawYMax-rawYMin)+0;
         y = window.innerHeight-newY;
+        //call line p5 method 
         line(x,y,x1,y1);
         
+}
+function TransformCoordinates(x,y){
+    
+    
+    return [x,y];
 }
 function HandleHand(hand){
 	 var fingers=hand.fingers;
@@ -108,12 +115,13 @@ function HandleHand(hand){
             
 }
 function Handleframe(frame){
-	if(frame.hands.length==1){
+	if(frame.hands.length===1){
         	//console.log(frame.hands);
                 var hand = frame.hands[0];
 		HandleHand(hand);
 	}
 }
+
 Leap.loop(controllerOptions, function(frame){
 	clear();
 	Handleframe(frame);
