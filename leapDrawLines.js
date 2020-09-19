@@ -6,6 +6,7 @@ var rawXMax = 100;
 var rawYMin = 1000;
 var rawYMax = 100;
 function HandleFinger(finger){
+        //add thickness
 	var x = finger.tipPosition[0];
 	var y = finger.tipPosition[1];
 	//var z=finger.tipPosition[2];
@@ -32,15 +33,17 @@ function HandleFinger(finger){
 	newY =(y-rawYMin)*(window.innerHeight-0)/(rawYMax-rawYMin)+0;
         //prints only the 5 circles "finger tip"
  	//circle(x,window.innerHeight-newY,50);
+        //create and assign stroke weight to a var 
+        var thick = strokeWeight(4);
         var bones = finger.bones;
         for (var i=0;i<bones.length;i++){
                 var bone = bones[i];
                     //handles bone data structure 
-                    HandleBone(bone);
+                    HandleBone(bone,thick);
             
         }
 }
-function HandleBone(bone){
+function HandleBone(bone,strokeWeight){
     //the distal end of the bone closest to the finger tip .nextJoint
     var x = bone.nextJoint[0];
     var y = bone.nextJoint[1];
@@ -56,9 +59,9 @@ function HandleBone(bone){
     var xB = TransformCoordinates(x1,y1)[0];
     var yB = TransformCoordinates(x1,y1)[1];
     //var z1 = bone.prevJoint[2];
+    strokeWeight;
     //call line p5 method 
     line(xT,yT,xB,yB);
-        
 }
 function TransformCoordinates(x,y){
         if (x <rawXMin){
