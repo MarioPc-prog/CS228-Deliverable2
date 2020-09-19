@@ -5,6 +5,7 @@ var rawXMin = 1000;
 var rawXMax = 100;
 var rawYMin = 1000;
 var rawYMax = 100;
+
 function HandleFinger(finger){
 	var x = finger.tipPosition[0];
 	var y=finger.tipPosition[1];
@@ -62,15 +63,37 @@ function HandleBone(bone){
 	if (bone.nextJoint[1] > rawYMax){
                 rawYMax=bone.nextJoint[1];
         }
+    if (bone.prevJoint[0] <rawXMin){
+		rawXMin=bone.prevJoint[0];
+	}
+	if (bone.prevJoint[0] > rawXMax){
+                rawXMax=bone.prevJoint[0];
+        }
+	if (bone.prevJoint[1] <rawYMin){
+                rawYMin=bone.prevJoint[1];
+        }
+	if (bone.prevJoint[1] > rawYMax){
+                rawYMax=bone.prevJoint[1];
+        }
+        var oldRangeX1 = (rawXMax-rawXMin);
+	var newRangeX1=(window.innerWidth-0);
+	x1 =(((x1 - rawXMin) * newRangeX1) /oldRangeX1) + rawXMin;
+        var oldRangeY1 = (rawYMax-rawYMin);
+        var newRangeY1=(window.innnerHeight-0);
+        var newY1 =(((y1 - rawYMin) * newRangeY1) /oldRangeY1) + rawYMin;
+	newY1 =(y1-rawYMin)*(window.innerHeight-0)/(rawYMax-rawYMin)+0;
+        y1 = window.innerHeight-newY1;
+        
+       
 	var oldRangeX = (rawXMax-rawXMin);
 	var newRangeX=(window.innerWidth-0);
-	var x =(((x - rawXMin) * newRangeX) /oldRangeX) + rawXMin;
+	x =(((x - rawXMin) * newRangeX) /oldRangeX) + rawXMin;
         var oldRangeY = (rawYMax-rawYMin);
         var newRangeY=(window.innnerHeight-0);
         var newY =(((y - rawYMin) * newRangeY) /oldRangeY) + rawYMin;
 	newY =(y-rawYMin)*(window.innerHeight-0)/(rawYMax-rawYMin)+0
-        y = window.innerHeight-newY
-        circle(x,y,50);
+        y = window.innerHeight-newY;
+        line(x,y,x1,y1);
         
 }
 function HandleHand(hand){
