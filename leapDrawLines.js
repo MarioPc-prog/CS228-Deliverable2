@@ -9,8 +9,6 @@ function HandleFinger(finger){
 	var x = finger.tipPosition[0];
 	var y=finger.tipPosition[1];
 	var z=finger.tipPosition[2];
-	//makes y value go up and down 
-	y=window.innerHeight-y;
 	//checks wheather the current horizontal position of the tip is less than the value stored in rawXMin.
 	if (finger.tipPosition[0] <rawXMin){
 		rawXMin=finger.tipPosition[0];
@@ -26,13 +24,13 @@ function HandleFinger(finger){
         }
 	var oldRangeX = (rawXMax-rawXMin);
 	var newRangeX=(window.innerWidth-0);
-	var x =(((x - rawXMin) * newRangeX) /oldRangeX) + rawXMin;
+	var x =(((x - rawXMin) * newRangeX) /oldRangeX) + 0;
 
 	var oldRangeY = (rawYMax-rawYMin);
-        var newRangeY=(window.innnerHeight-y-0);
+        var newRangeY=(window.innnerHeight-0);
         var newY =(((y - rawYMin) * newRangeY) /oldRangeY) + rawYMin;
-	newY =(y-rawYMin)*(window.innerHeight-0)/(rawYMax-rawYMin)+rawYMin
- 	//circle(x,y,50);
+	newY =(y-rawYMin)*(window.innerHeight-0)/(rawYMax-rawYMin)+0
+ 	//circle(x,window.innerHeight-newY,50);
         var bones = finger.bones;
         for (var i=0;i<bones.length;i++){
                 var bone = bones[i];
@@ -61,7 +59,11 @@ function HandleBone(bone){
 	var oldRangeX = (rawXMax-rawXMin);
 	var newRangeX=(window.innerWidth-0);
 	var x =(((x - rawXMin) * newRangeX) /oldRangeX) + rawXMin;
-        circle(x,y,50);
+        var oldRangeY = (rawYMax-rawYMin);
+        var newRangeY=(window.innnerHeight-0);
+        var newY =(((y - rawYMin) * newRangeY) /oldRangeY) + rawYMin;
+	newY =(y-rawYMin)*(window.innerHeight-0)/(rawYMax-rawYMin)+0
+        circle(x,window.innerHeight-newY,50);
 }
 function HandleHand(hand){
 	 var fingers=hand.fingers;
