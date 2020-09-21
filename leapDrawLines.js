@@ -33,17 +33,35 @@ function HandleFinger(finger){
 	newY =(y-rawYMin)*(window.innerHeight-0)/(rawYMax-rawYMin)+0;
         //prints only the 5 circles "finger tip"
  	//circle(x,window.innerHeight-newY,50);
-        //create and assign stroke weight to a var 
-        var thick = strokeWeight(4);
+        //create and assign stroke weight to a var
         var bones = finger.bones;
         for (var i=0;i<bones.length;i++){
+                var thick = strokeWeight(4);
                 var bone = bones[i];
-                    //handles bone data structure 
+                //console.log(bone);
+                if(bones[i].type === 0){
+                    var thick = strokeWeight(10);
+                    var bone = bones[i];
                     HandleBone(bone,thick);
-            
-        }
+                }
+                if(bones[i].type === 1){
+                    var thick = strokeWeight(7);
+                    var bone = bones[i];
+                    HandleBone(bone,thick);
+                }
+                if(bones[i].type === 2){
+                    var thick = strokeWeight(4);
+                    var bone = bones[i];
+                    HandleBone(bone,thick);
+                }
+               
+                HandleBone(bone,thick);
+         
+                
+ }
 }
-function HandleBone(bone,strokeWeight){
+
+function HandleBone(bone,thick){
     //the distal end of the bone closest to the finger tip .nextJoint
     var x = bone.nextJoint[0];
     var y = bone.nextJoint[1];
@@ -59,8 +77,10 @@ function HandleBone(bone,strokeWeight){
     var xB = TransformCoordinates(x1,y1)[0];
     var yB = TransformCoordinates(x1,y1)[1];
     //var z1 = bone.prevJoint[2];
-    strokeWeight;
+    
+    
     //call line p5 method 
+    thick;
     line(xT,yT,xB,yB);
 }
 function TransformCoordinates(x,y){
@@ -89,13 +109,10 @@ function TransformCoordinates(x,y){
     return [x,y];
 }
 function HandleHand(hand){
-	 var fingers=hand.fingers;
-        for (var i=0;i<fingers.length;i++){
-        //console.log(fingers[i]);
-        //comment out the if statement to print all circles
-                var finger = fingers[i];
-                //handles finger data type structures
-		HandleFinger(finger);
+	 var fingers = hand.fingers;
+        for (var i = 0;i < fingers.length; i++){
+            var finger = fingers[i];
+            HandleFinger(finger);
         }
             
 }
